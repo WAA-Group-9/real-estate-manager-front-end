@@ -3,9 +3,15 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import HeartIcon from "../SvgIcon/HeartIcon";
+import {Link, useNavigate} from "react-router-dom";
 
-const Property = ({key, img, title, address, price, description}) => {
+const Property = ({id, img, title, address, price, description}) => {
     const sliderRef = useRef(null);
+    const navigate = useNavigate();
+    console.log(id)
+    const handleClick = () => {
+        navigate(`/property/${id}`);
+    };
 
     const settings = {
         dots: true,
@@ -28,7 +34,7 @@ const Property = ({key, img, title, address, price, description}) => {
             className="inline-block ml-4 mb-10  h-[520px]  bg-gray-100 rounded-lg shadow-xl overflow-hidden relative hover:cursor-pointer transition duration-300 hover:bg-gray-200">
             <Slider ref={sliderRef} {...settings}>
                 {img && img.map(response => (
-                    <div>
+                    <div onClick={handleClick}>
                         <img
                             src={response.link}
                             alt={response.id}
@@ -39,7 +45,7 @@ const Property = ({key, img, title, address, price, description}) => {
             </Slider>
 
 
-            <div className="absolute bottom-0 w-full p-3  box-border">
+            <div className="absolute bottom-0 w-full p-3  box-border" onClick={handleClick}>
                 <h1 className="text-lg font-segoe-ui font-bold text-left">{title}</h1>
                 <p className="text-md font-segoe-ui text-left">{address} </p>
                 <p className="text-sm font-segoe-ui text-left">{description}</p>

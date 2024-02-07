@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import Property from "./Property";
 
+
 function Properties(props) {
+
     const [data, setData] = useState([
         {
             id: 1,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
+            img: [{id: 1, link: "/asset/img/1.webp"}, {id: 1, link: "/asset/img/2.webp"}, {
                 id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
+                link: "/asset/img/3.webp"
+            }, {id: 1, link: "/asset/img/4.webp"}],
             title: "Muscoda",
             address: "123 wilson Mckinney Tx",
             price: 200000,
@@ -94,9 +96,9 @@ function Properties(props) {
     ])
 
     return (
-        <div className="w-full p-20  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="w-full p-20  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4" >
             {data && data.map(response =>
-                <Property key={response.id} img={response.img} title={response.title} address={response.address}
+                <Property key={response.id}  id={response.id} img={response.img} title={response.title} address={response.address}
                           price={response.price} description={response.description}/>
             )}
         </div>

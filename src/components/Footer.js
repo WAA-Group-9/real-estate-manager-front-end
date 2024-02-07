@@ -29,7 +29,7 @@ const Footer = () => {
                         <p className="text-lg"><a href="#">Report neighborhood concern</a></p>
                     </div>
                     <div className="flex flex-col items-center">
-                        <h3 className="text-xl font-medium">Airbnb</h3>
+                        <h3 className="text-xl font-medium">Group9</h3>
                         <p className="text-lg"><a href="#">Help Center</a></p>
                         <p className="text-lg"><a href="#">Get help with a safety issue</a></p>
                         <p className="text-lg"><a href="#">AirCover</a></p>

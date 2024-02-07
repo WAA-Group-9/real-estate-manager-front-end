@@ -6,7 +6,7 @@ const PropertyInfo = ({price, address, beds, baths, sqft}) => {
         <div className=" bg-transparent  mt-9 ">
             <div className="flex  w-full">
                 <div className="flex-auto text-left w-1/2 ">
-                    <div className="text-4xl font-bold">45000{price}</div>
+                    <div className="text-4xl font-bold">$45000{price}</div>
                     <div className="text-xl ">123 wilson creek blvd, Mckinney texas{address}</div>
                 </div>
                 <div className="flex-auto text-center ">
