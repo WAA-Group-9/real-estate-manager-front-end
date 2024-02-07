@@ -2,6 +2,7 @@ import React, {useRef} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import HeartIcon from "../SvgIcon/HeartIcon";
 
 const Property = ({key, img, title, address, price, description}) => {
     const sliderRef = useRef(null);
@@ -24,14 +25,14 @@ const Property = ({key, img, title, address, price, description}) => {
     };
     return (
         <div
-            className="inline-block ml-10 mb-10 w-[274px] h-[420px] bg-gray-100 rounded-lg overflow-hidden relative hover:cursor-pointer transition duration-300 hover:bg-gray-200">
+            className="inline-block ml-4 mb-10  h-[520px]  bg-gray-100 rounded-lg shadow-xl overflow-hidden relative hover:cursor-pointer transition duration-300 hover:bg-gray-200">
             <Slider ref={sliderRef} {...settings}>
-                {img && img.map(response=>(
+                {img && img.map(response => (
                     <div>
                         <img
                             src={response.link}
                             alt={response.id}
-                            className="w-full h-[260px] object-cover rounded-t-lg"
+                            className="w-full h-[340px] object-cover rounded-lg "
                         />
                     </div>
                 ))}
@@ -42,7 +43,13 @@ const Property = ({key, img, title, address, price, description}) => {
                 <h1 className="text-lg font-segoe-ui font-bold text-left">{title}</h1>
                 <p className="text-md font-segoe-ui text-left">{address} </p>
                 <p className="text-sm font-segoe-ui text-left">{description}</p>
-                <div className="text-2xl font-bold text-right mt-3">{price}</div>
+                <div className="w-full bg-transparent  mt-5 mb-5 flex items-center justify-between ">
+                    <div className=" ">
+                        <HeartIcon className="h-8 w-8 p-0.5 fill-black mr-1 hover:h-10 w-10"/>
+                    </div>
+                    <div className="text-2xl font-bold   right-0">${price}</div>
+
+                </div>
             </div>
 
             <button onClick={goToPrev}

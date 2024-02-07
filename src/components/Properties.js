@@ -44,7 +44,7 @@ function Properties(props) {
             }, {id: 1, link: "/asset/img/home.jpg"}],
             title: "Muscoda",
             address: "123 wilson Mckinney Tx",
-            price: 200000,
+            price: 5000000,
             description: "there is Ac system it cool though come and join us"
         },
         {
@@ -55,7 +55,7 @@ function Properties(props) {
             }, {id: 1, link: "/asset/img/home.jpg"}],
             title: "Muscoda",
             address: "123 wilson Mckinney Tx",
-            price: 200000,
+            price: 40000000,
             description: "there is Ac system it cool though come and join us"
         },
         {
@@ -66,7 +66,7 @@ function Properties(props) {
             }, {id: 1, link: "/asset/img/home.jpg"}],
             title: "Muscoda",
             address: "123 wilson Mckinney Tx",
-            price: 200000,
+            price: 6000000,
             description: "there is Ac system it cool though come and join us"
         },
         {
@@ -94,7 +94,7 @@ function Properties(props) {
     ])
 
     return (
-        <div className="w-full p-20 inline-block">
+        <div className="w-full p-20  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {data && data.map(response =>
                 <Property key={response.id} img={response.img} title={response.title} address={response.address}
                           price={response.price} description={response.description}/>
