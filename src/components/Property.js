@@ -5,11 +5,13 @@ import 'slick-carousel/slick/slick-theme.css';
 import HeartIcon from "../SvgIcon/HeartIcon";
 import {Link, useNavigate} from "react-router-dom";
 
-const Property = ({id, img, title, address, price, description}) => {
+const Property = ({id, images, title, address, price, description}) => {
     const sliderRef = useRef(null);
     const navigate = useNavigate();
-    console.log(id)
+    address = address.street + ", " + address.city + " " + address.state;
+    console.log(images)
     const handleClick = () => {
+
         navigate(`/property/${id}`);
     };
 
@@ -33,11 +35,11 @@ const Property = ({id, img, title, address, price, description}) => {
         <div
             className="inline-block ml-4 mb-10  h-[520px]  bg-gray-100 rounded-lg shadow-xl overflow-hidden relative hover:cursor-pointer transition duration-300 hover:bg-gray-200">
             <Slider ref={sliderRef} {...settings}>
-                {img && img.map(response => (
+                {images && images.map(response => (
                     <div onClick={handleClick}>
                         <img
-                            src={response.link}
-                            alt={response.id}
+                            src={response.url}
+                            alt={response.propertyId}
                             className="w-full h-[340px] object-cover rounded-lg "
                         />
                     </div>

@@ -1,5 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
-import mapboxgl, {ReactMapGL} from 'mapbox-gl';
+import React, {useEffect, useRef} from 'react';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from "mapbox-gl";
 
 function MapBox({latitude, longitude}) {
     mapboxgl.accessToken  = 'pk.eyJ1IjoiYW11bmkiLCJhIjoiY2sxNmo0MDM5MDk1dTNtbXJqcXM4eTFqNSJ9.1hiopLNKY1XJ097xXveZCg';
@@ -13,7 +14,7 @@ function MapBox({latitude, longitude}) {
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v12',
             center: [longitude, latitude],
-            zoom: 16,
+            zoom: 14,
         });
 
         new mapboxgl.Marker({

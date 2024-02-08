@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import Property from "./Property";
-import {find} from "../network/NetworkCall";
-import login from "../page/Login";
+import {findByIdWithExtraResource } from "../network/NetworkCall";
 
 
-function Properties(props) {
-
+function Wishlists(props) {
+    const id = 1;
     const [property, setProperty] = useState(null)
     const [error, setError] = useState(null)
 
     useEffect(() => {
         console.log("hello")
-        find('properties').then(response => {
+        findByIdWithExtraResource('user',id,'mylist').then(response => {
             console.log(response.data)
             setProperty(response.data)
         }).catch(error => setError(error))
@@ -19,14 +18,14 @@ function Properties(props) {
 
     if (error)
         return (<div className="flex flex-col justify-center items-center mt-36 mb-48">
-            <p className="text-xl">There is no Property</p>
+            <p className="text-xl">You have not a wishlist</p>
         </div>)
 
     return (
         <div
             className="w-full p-20  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {property && property.map(response =>
-                <Property key={response.id} id={response.id} images={response.images} title={response.title}
+                <Property key={response.id} id={response.id} img={response.images} title={response.title}
                           address={response.address}
                           price={response.price} description={response.description}/>
             )}
@@ -34,4 +33,4 @@ function Properties(props) {
     );
 }
 
-export default Properties;
+export default Wishlists;

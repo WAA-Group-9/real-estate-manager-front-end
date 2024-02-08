@@ -2,10 +2,10 @@ import React from 'react';
 import HeartIcon from "../SvgIcon/HeartIcon";
 import ShareIcon from "../SvgIcon/ShareIcon";
 
-const TopPropertyTitle = () => {
+const TopPropertyTitle = ({title}) => {
     return (
         <div className="w-2/3 bg-transparent  pb-7 flex items-center justify-between">
-            <h1 className="text-4xl">Title</h1>
+            <h1 className="text-4xl">{title}</h1>
             <div className="flex items-center">
                 <button className="flex items-center mr-4">
                     <ShareIcon/>

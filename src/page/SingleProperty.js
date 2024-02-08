@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Header from "../components/Header/Header";
 import ImageHolder from "../components/ImageHolder";
 import TopPropertyTitle from "../components/TopPropertyTitle";
 import PropertyInfo from "../components/PropertyInfo";
@@ -12,128 +11,52 @@ import Amenities from "../components/Amenities";
 import MapBox from "../components/MapBox";
 import Footer from "../components/Footer";
 import {useParams} from "react-router-dom";
-import async from "async";
+import TopHeader from "../components/Header/TopHeader";
+import {findById} from "../network/NetworkCall";
 
 function SingleProperty(props) {
+    const { id } = useParams();
+    const [property, setProperty] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const {id} = useParams()
-    const [data, setData] = useState([
-        {
-            id: 1,
-            img: [{id: 1, link: "/asset/img/1.webp"}, {id: 1, link: "/asset/img/2.webp"}, {
-                id: 1,
-                link: "/asset/img/3.webp"
-            }, {id: 1, link: "/asset/img/4.webp"},{id: 1, link: "/asset/img/5.webp"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 2,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"},{id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 3,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"},{id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 4,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"},{id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 5000000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 5,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"},{id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 40000000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 6,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"},{id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 6000000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 7,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"},{id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 8,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"},{id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        }
-    ])
-    // useEffect(() => {
-    const selectedProperty = data.find(prop => prop.id === parseInt(id));
+    useEffect(() => {
+        findById('properties', id)
+            .then(response => {
+                setProperty(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                setError(error);
+                setLoading(false);
+            });
+    }, [id]);
 
-    // }, [id, data])
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p className="text-xl">Error: {error.message}</p>;
+    if (!property) return <p className="text-xl">Property not found!</p>;
 
-    console.log(id)
-    console.log(selectedProperty)
     return (
         <div>
-            <Header/>
-            <div className=" flex flex-col justify-center items-center mt-20">
-                <TopPropertyTitle/>
-                <ImageHolder img={selectedProperty.img}/>
+            <TopHeader
+                styles="w-full h-[121px]  flex items-center justify-between px-6 border border-b-2 border-gray-100 shadow-sm"/>
+            <div className=" flex flex-col justify-center items-center mt-20 ">
+                <TopPropertyTitle title={property.title}/>
+                <ImageHolder img={property.images}/>
                 <div className="w-2/3 flex flex-auto">
                     <div className="w-3/5 flex-auto">
-                        <PropertyInfo/>
-                        <AboutHouse title="Condominium"
+                        <PropertyInfo price={property.price} address={property.address} baths={2} beds={property.bedrooms} sqft={property.totalArea} owner={property.owner}/>
+                        <AboutHouse title={property.propertyType}
                                     description="A common area with wifi that’s well-suited for working"/>
                         <AboutHouse title="Condominium"
                                     description="A common area with wifi that’s well-suited for working"/>
                         <AboutHouse title="Condominium"
                                     description="A common area with wifi that’s well-suited for working"/>
                         <Line/>
-                        <Description/>
+                        <Description description={property.description}/>
                         <Line/>
-                        <Amenities/>
-                        <MapBox latitude="8.953414060751477" longitude="38.74833860696266"/>
+                        <Amenities amenities={property.amenities}/>
+                        <MapBox latitude={property.address.latitude} longitude={property.address.longitude}/>
 
                     </div>
                     <div className="flex-auto w-2/5">

@@ -52,7 +52,7 @@ const PersonalInfoPage = () => {
                     <div className="flex  items-center justify-between ">
                         <div className="mt-7 ">
                             <h1 className="text-2xl ">Phone numbers</h1>
-                            <p className="text-lg text-gray-500">Add a number so confirmed guests and Airbnb can get in touch. You can add other numbers and choose how they’re used.{fullname}</p>
+                            <p className="text-lg text-gray-500">Add a number so confirmed guests and  can get in touch. You can add other numbers and choose how they’re used.{fullname}</p>
                         </div>
                         <div className="mt-7 ">
                             <h1 className="text-2xl hover:underline cursor-pointer">Edit</h1>

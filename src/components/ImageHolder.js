@@ -7,7 +7,7 @@ import NextIcon from "../SvgIcon/NextIcon";
 const ImageHolder = ({img}) => {
     const [popupOpen, setPopupOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+    console.log(img)
     const openPopup = (index) => {
         setCurrentImageIndex(index)
         setPopupOpen(true);
@@ -27,24 +27,24 @@ const ImageHolder = ({img}) => {
     return (
         <div className="w-2/3 h-[620px] rounded-3xl shadow-md overflow-hidden relative">
             <div className="w-1/2 h-full float-left">
-                <img src={img && img[0].link} alt="First" className="w-full h-full object-cover rounded-l-3xl"
+                <img src={img && img[0].url} alt="First" className="w-full h-full object-cover rounded-l-3xl"
                      onClick={() => openPopup(0)}/>
             </div>
             <div className="w-1/2 h-full flex flex-wrap">
                 <div className="w-1/2 h-1/2 pb-1 pl-2 ">
-                    <img src={img && img[1].link} alt="Second"
+                    <img src={img && img[1].url} alt="Second"
                          className="w-full h-full object-cover rounded-tl-30" onClick={() => openPopup(1)}/>
                 </div>
                 <div className="w-1/2 h-1/2 pb-1 pl-2">
-                    <img src={img && img[2].link} alt="Third"
+                    <img src={img && img[2].url} alt="Third"
                          className="w-full h-full object-cover rounded-tr-30" onClick={() => openPopup(2)}/>
                 </div>
                 <div className="w-1/2 h-1/2 pt-1 pl-2 ">
-                    <img src={img && img[3].link} alt="Fourth"
+                    <img src={img && img[3].url} alt="Fourth"
                          className="w-full h-full object-cover rounded-bl-30" onClick={() => openPopup(3)}/>
                 </div>
                 <div className="w-1/2 h-1/2 pt-1 pl-2">
-                    <img src={img && img[4].link} alt="Fifth"
+                    <img src={img && img[4].url} alt="Fifth"
                          className="w-full h-full object-cover rounded-br-30" onClick={() => openPopup(4)}/>
                 </div>
             </div>
