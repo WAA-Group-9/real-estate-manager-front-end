@@ -1,8 +1,29 @@
-import React from 'react';
-import CloseIcon from "../SvgIcon/CloseIcon";
+import React, {useRef} from 'react';
+import CloseIcon from "../../SvgIcon/CloseIcon";
+import useAuth from "../../network/useAuth";
+import {create, createWithExtraResource} from "../../network/NetworkCall";
 
 
-const ContactForm = ({closePopup}) => {
+const ContactForm = ({id, closePopup}) => {
+    const {user} = useAuth();
+    const amount = useRef();
+    const message = useRef();
+    const currentDate = new Date();
+   const email=localStorage.getItem('email')
+
+    const sendOffer = () => {
+        createWithExtraResource('properties', id, 'offers', {
+            "email": email,
+            "propertyId": id,
+            "offerAmount": amount.current.value,
+            "offerDate": currentDate,
+            "offerDescription": message.current.vaue
+        }).then(data => {
+            alert("Offer sent")
+            closePopup()
+        }).catch(error => console.log(error))
+    }
+
     return (
         <div
             className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-80 z-50">
@@ -18,28 +39,21 @@ const ContactForm = ({closePopup}) => {
                         <p className="text-3xl font-bold mb-8">Welcome to Group 9</p>
                         <div className="mb-8">
                             <input
-                                type="text"
+                                ref={amount}
+                                type="number"
                                 className="w-full h-20 border border-gray-400 rounded-t-lg px-4 text-xl"
-                                placeholder="Name"
-                            />
-                            <input
-                                type="text"
-                                className="w-full h-20 border border-gray-400  px-4 text-xl"
-                                placeholder="Phone"
-                            />
-                            <input
-                                type="text"
-                                className="w-full h-20 border border-gray-400  px-4 text-xl"
-                                placeholder="Email"
+                                placeholder="offer amount"
                             />
                             <textarea
+                                ref={message}
                                 className="p-4 w-full h-44 border border-gray-400  px-4 text-xl"
                                 placeholder="Message"
                             />
 
                         </div>
-                        <button className="w-full h-20 rounded-xl bg-green-500 text-white text-lg active: p-3">
-                            Contact Owner
+                        <button className="w-full h-20 rounded-xl bg-green-500 text-white text-lg active: p-3"
+                                onClick={sendOffer}>
+                            Send Offer
                         </button>
                         {/*<div className=" mt-4 flex justify-end">*/}
                         {/*    <p className=" text-lg right-0">if you have an account <span className="text-green-500"><Link to="/login">Log in</Link></span></p>*/}

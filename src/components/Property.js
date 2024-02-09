@@ -1,13 +1,18 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import HeartIcon from "../SvgIcon/HeartIcon";
 import {Link, useNavigate} from "react-router-dom";
+import {createByIdWithExtraResourceWithExtraId} from "../network/NetworkCall";
+import HeartIconRed from "../SvgIcon/HeartIconRed";
+import useAuth from "../network/useAuth";
 
 const Property = ({id, images, title, address, price, description}) => {
+    const [like, setLike] = useState(false);
     const sliderRef = useRef(null);
     const navigate = useNavigate();
+    const {user, logged} = useAuth()
     address = address.street + ", " + address.city + " " + address.state;
     console.log(images)
     const handleClick = () => {
@@ -26,6 +31,13 @@ const Property = ({id, images, title, address, price, description}) => {
         console.log('Next button clicked');
         sliderRef.current.slickNext();
     };
+
+    const likeClicked = (() => {
+        createByIdWithExtraResourceWithExtraId('user', 1, 'mylist', id).then(data => setLike(true)).catch(err => {
+            console.log(err)
+            setLike(false)
+        })
+    })
 
     const goToPrev = () => {
         console.log('prev button clicked');
@@ -48,12 +60,27 @@ const Property = ({id, images, title, address, price, description}) => {
 
 
             <div className="absolute bottom-0 w-full p-3  box-border" onClick={handleClick}>
-                <h1 className="text-lg font-segoe-ui font-bold text-left">{title}</h1>
-                <p className="text-md font-segoe-ui text-left">{address} </p>
-                <p className="text-sm font-segoe-ui text-left">{description}</p>
+                <h1 className="text-md font-segoe-ui font-bold text-left">{title}</h1>
+                <p className="text-sm font-segoe-ui text-left">{address} </p>
+                <p className="text-xs font-segoe-ui text-left">{description}</p>
                 <div className="w-full bg-transparent  mt-5 mb-5 flex items-center justify-between ">
-                    <div className=" ">
-                        <HeartIcon className="h-8 w-8 p-0.5 fill-black mr-1 hover:h-10 w-10"/>
+                    <div className=" " onClick={() => {
+                        if (logged) {
+                            likeClicked();
+                            console.log(user)
+                        } else alert("First you should login")
+                    }}>
+                        {like ? (
+                            <>
+                                <HeartIconRed className="h-6 w-6 p-0.5 mr-1"/>
+                                <span>Saved</span>
+                            </>
+                        ) : (
+                            <>
+                                <HeartIcon className="h-8 w-8 p-0.5 fill-black mr-1 hover:h-10 w-10"/>
+
+                            </>)}
+
                     </div>
                     <div className="text-2xl font-bold   right-0">${price}</div>
 

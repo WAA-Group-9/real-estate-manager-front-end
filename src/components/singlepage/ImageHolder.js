@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import ShowMoreIcon from "../SvgIcon/ShowMoreIcon";
-import CloseIcon from "../SvgIcon/CloseIcon";
-import PrevIcon from "../SvgIcon/PrevIcon";
-import NextIcon from "../SvgIcon/NextIcon";
+import ShowMoreIcon from "../../SvgIcon/ShowMoreIcon";
+import CloseIcon from "../../SvgIcon/CloseIcon";
+import PrevIcon from "../../SvgIcon/PrevIcon";
+import NextIcon from "../../SvgIcon/NextIcon";
 
 const ImageHolder = ({img}) => {
     const [popupOpen, setPopupOpen] = useState(false);
@@ -53,7 +53,7 @@ const ImageHolder = ({img}) => {
                     className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-80 z-50">
                     <div className="max-w-screen-lg w-full h-full relative">
                         <img
-                            src={img[currentImageIndex].link}
+                            src={img[currentImageIndex].url}
                             alt={`Image ${currentImageIndex + 1}`}
                             className="absolute max-w-full max-h-full m-auto top-1/4"
                         />

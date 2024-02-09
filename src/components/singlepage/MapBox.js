@@ -13,15 +13,15 @@ function MapBox({latitude, longitude}) {
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [longitude, latitude],
-            zoom: 14,
+            center: [latitude,longitude ],
+            zoom: 10,
         });
 
         new mapboxgl.Marker({
             color: "#22c35d",
             scale: 1.5
         })
-            .setLngLat([longitude, latitude])
+            .setLngLat([latitude,longitude])
             .addTo(map.current);
 
     },[latitude, longitude]);

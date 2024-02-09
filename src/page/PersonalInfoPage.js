@@ -30,7 +30,7 @@ const PersonalInfoPage = () => {
                     <div className="flex  items-center justify-between ">
                         <div className="mt-7 ">
                             <h1 className="text-2xl ">Legal Name</h1>
-                            <p className="text-lg text-gray-500">Ayele Mesfin{fullname}</p>
+                            <p className="text-lg text-gray-500">Amanuel Lawro{fullname}</p>
                         </div>
                         <div className="mt-7 ">
                             <h1 className="text-2xl hover:underline cursor-pointer">Edit</h1>

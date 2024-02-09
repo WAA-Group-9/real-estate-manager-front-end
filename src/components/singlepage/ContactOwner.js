@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
-import MessageIcon from "../SvgIcon/MessageIcon";
+import MessageIcon from "../../SvgIcon/MessageIcon";
 import ContactForm from "./ContactForm";
 
-function ContactOwner(props) {
+function ContactOwner({id}) {
     const [popupOpen, setPopupOpen] = useState(false);
 
     const openPopup = (index) => {
@@ -24,7 +24,7 @@ function ContactOwner(props) {
                     <span>Contact Owner</span>
                 </button>
             </div>
-            {popupOpen && <ContactForm closePopup={closePopup}/>}
+            {popupOpen && <ContactForm id={id} closePopup={closePopup}/>}
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import HomeIcon from "../SvgIcon/HomeIcon";
-import ShowMoreIcon from "../SvgIcon/ShowMoreIcon";
+import HomeIcon from "../../SvgIcon/HomeIcon";
+import ShowMoreIcon from "../../SvgIcon/ShowMoreIcon";
 
 function Amenities({amenities}) {
     return (

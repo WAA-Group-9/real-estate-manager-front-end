@@ -4,13 +4,12 @@ import {findByIdWithExtraResource } from "../network/NetworkCall";
 
 
 function Wishlists(props) {
-    const id = 1;
     const [property, setProperty] = useState(null)
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        console.log("hello")
-        findByIdWithExtraResource('user',id,'mylist').then(response => {
+        const userId = localStorage.getItem('userid');
+        findByIdWithExtraResource('user',userId,'mylist').then(response => {
             console.log(response.data)
             setProperty(response.data)
         }).catch(error => setError(error))
@@ -25,7 +24,7 @@ function Wishlists(props) {
         <div
             className="w-full p-20  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {property && property.map(response =>
-                <Property key={response.id} id={response.id} img={response.images} title={response.title}
+                <Property key={response.id} id={response.id} images={response.images} title={response.title}
                           address={response.address}
                           price={response.price} description={response.description}/>
             )}
