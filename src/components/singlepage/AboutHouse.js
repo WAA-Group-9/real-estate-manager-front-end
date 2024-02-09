@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeIcon from "../SvgIcon/HomeIcon";
+import HomeIcon from "../../SvgIcon/HomeIcon";
 
 const AboutHouse = ({ title, description }) => {
     return (

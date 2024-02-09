@@ -1,102 +1,67 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Property from "./Property";
+import {find} from "../network/NetworkCall";
+import login from "../page/Login";
 
-function Properties(props) {
-    const [data, setData] = useState([
-        {
-            id: 1,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 2,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 3,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 4,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 5000000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 5,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 40000000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 6,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 6000000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 7,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
-        },
-        {
-            id: 8,
-            img: [{id: 1, link: "/asset/img/home.jpg"}, {id: 1, link: "/asset/img/home.jpg"}, {
-                id: 1,
-                link: "/asset/img/home.jpg"
-            }, {id: 1, link: "/asset/img/home.jpg"}],
-            title: "Muscoda",
-            address: "123 wilson Mckinney Tx",
-            price: 200000,
-            description: "there is Ac system it cool though come and join us"
+
+function Properties({criteria}) {
+
+    const [property, setProperty] = useState(null)
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+        console.log("I'm in properties ", criteria);
+
+        if (criteria !== null && typeof criteria !== 'undefined') {
+            const queryParams = [];
+            if (criteria.minPrice !== null && typeof criteria.minPrice !== 'undefined') {
+                queryParams.push(`minPrice=${criteria.minPrice}`);
+            }
+            if (criteria.maxPrice !== null && typeof criteria.maxPrice !== 'undefined') {
+                queryParams.push(`maxPrice=${criteria.maxPrice}`);
+            }
+            if (criteria.propertyType !== null && typeof criteria.propertyType !== 'undefined') {
+                queryParams.push(`propertyType=${criteria.propertyType}`);
+            }
+            if (criteria.minBedrooms !== null && typeof criteria.minBedrooms !== 'undefined') {
+                queryParams.push(`minBedrooms=${criteria.minBedrooms}`);
+            }
+
+            // Construct the endpoint by joining queryParams with '&' and prefixing with 'properties?'
+            const endpoint = queryParams.length > 0 ? `properties?${queryParams.join('&')}` : 'properties';
+
+            console.log(endpoint)
+            // Make the request with the constructed endpoint
+            find(endpoint)
+                .then(response => {
+                    console.log(response.data);
+                    setProperty(response.data);
+                })
+                .catch(error => setError(error));
+        } else {
+            console.log("2")
+            // If criteria is null or undefined, fetch all properties
+            find('properties')
+                .then(response => {
+                    console.log(response.data);
+                    setProperty(response.data);
+                })
+                .catch(error => setError(error));
         }
-    ])
+    }, [criteria]);
+
+
+    if (error)
+        return (<div className="flex flex-col justify-center items-center mt-36 mb-48">
+            <p className="text-xl">There is no Property</p>
+        </div>)
 
     return (
-        <div className="w-full p-20  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {data && data.map(response =>
-                <Property key={response.id} img={response.img} title={response.title} address={response.address}
+        <div
+            className="w-full p-20  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            {property && property.map(response =>
+                <Property key={response.id} id={response.id} images={response.images} title={response.title}
+                          address={response.address}
                           price={response.price} description={response.description}/>
             )}
         </div>

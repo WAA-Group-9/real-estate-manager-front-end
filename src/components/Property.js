@@ -1,11 +1,24 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import HeartIcon from "../SvgIcon/HeartIcon";
+import {Link, useNavigate} from "react-router-dom";
+import {createByIdWithExtraResourceWithExtraId} from "../network/NetworkCall";
+import HeartIconRed from "../SvgIcon/HeartIconRed";
+import useAuth from "../network/useAuth";
 
-const Property = ({key, img, title, address, price, description}) => {
+const Property = ({id, images, title, address, price, description}) => {
+    const [like, setLike] = useState(false);
     const sliderRef = useRef(null);
+    const navigate = useNavigate();
+    const {user, logged} = useAuth()
+    address = address.street + ", " + address.city + " " + address.state;
+    console.log(images)
+    const handleClick = () => {
+
+        navigate(`/property/${id}`);
+    };
 
     const settings = {
         dots: true,
@@ -19,6 +32,13 @@ const Property = ({key, img, title, address, price, description}) => {
         sliderRef.current.slickNext();
     };
 
+    const likeClicked = (() => {
+        createByIdWithExtraResourceWithExtraId('user', 1, 'mylist', id).then(data => setLike(true)).catch(err => {
+            console.log(err)
+            setLike(false)
+        })
+    })
+
     const goToPrev = () => {
         console.log('prev button clicked');
         sliderRef.current.slickPrev();
@@ -27,11 +47,11 @@ const Property = ({key, img, title, address, price, description}) => {
         <div
             className="inline-block ml-4 mb-10  h-[520px]  bg-gray-100 rounded-lg shadow-xl overflow-hidden relative hover:cursor-pointer transition duration-300 hover:bg-gray-200">
             <Slider ref={sliderRef} {...settings}>
-                {img && img.map(response => (
-                    <div>
+                {images && images.map(response => (
+                    <div onClick={handleClick}>
                         <img
-                            src={response.link}
-                            alt={response.id}
+                            src={response.url}
+                            alt={response.propertyId}
                             className="w-full h-[340px] object-cover rounded-lg "
                         />
                     </div>
@@ -39,13 +59,28 @@ const Property = ({key, img, title, address, price, description}) => {
             </Slider>
 
 
-            <div className="absolute bottom-0 w-full p-3  box-border">
-                <h1 className="text-lg font-segoe-ui font-bold text-left">{title}</h1>
-                <p className="text-md font-segoe-ui text-left">{address} </p>
-                <p className="text-sm font-segoe-ui text-left">{description}</p>
+            <div className="absolute bottom-0 w-full p-3  box-border" onClick={handleClick}>
+                <h1 className="text-md font-segoe-ui font-bold text-left">{title}</h1>
+                <p className="text-sm font-segoe-ui text-left">{address} </p>
+                <p className="text-xs font-segoe-ui text-left">{description}</p>
                 <div className="w-full bg-transparent  mt-5 mb-5 flex items-center justify-between ">
-                    <div className=" ">
-                        <HeartIcon className="h-8 w-8 p-0.5 fill-black mr-1 hover:h-10 w-10"/>
+                    <div className=" " onClick={() => {
+                        if (logged) {
+                            likeClicked();
+                            console.log(user)
+                        } else alert("First you should login")
+                    }}>
+                        {like ? (
+                            <>
+                                <HeartIconRed className="h-6 w-6 p-0.5 mr-1"/>
+                                <span>Saved</span>
+                            </>
+                        ) : (
+                            <>
+                                <HeartIcon className="h-8 w-8 p-0.5 fill-black mr-1 hover:h-10 w-10"/>
+
+                            </>)}
+
                     </div>
                     <div className="text-2xl font-bold   right-0">${price}</div>
 

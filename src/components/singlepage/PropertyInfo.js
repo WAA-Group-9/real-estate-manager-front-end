@@ -1,24 +1,24 @@
 import React from 'react';
-import Line from "./Line";
+import Line from "../Line";
 
-const PropertyInfo = ({price, address, beds, baths, sqft}) => {
+const PropertyInfo = ({price, address, beds, baths, sqft,owner}) => {
     return (
         <div className=" bg-transparent  mt-9 ">
             <div className="flex  w-full">
                 <div className="flex-auto text-left w-1/2 ">
-                    <div className="text-4xl font-bold">45000{price}</div>
-                    <div className="text-xl ">123 wilson creek blvd, Mckinney texas{address}</div>
+                    <div className="text-4xl font-bold">${price}</div>
+                    <div className="text-xl ">{address.street}, {address.city}  {address.state}</div>
                 </div>
                 <div className="flex-auto text-center ">
-                    <div className="text-4xl font-bold ">2{beds}</div>
+                    <div className="text-4xl font-bold ">{beds}</div>
                     <div className="text-xl">Beds</div>
                 </div>
                 <div className="flex-auto text-center">
-                    <div className="text-4xl font-bold ">2{baths}</div>
+                    <div className="text-4xl font-bold ">{baths}</div>
                     <div className="text-xl">Baths</div>
                 </div>
                 <div className="flex-auto text-center">
-                    <div className="text-4xl font-bold ">4020{sqft}</div>
+                    <div className="text-4xl font-bold ">{sqft}</div>
                     <div className="text-xl">Sqft</div>
                 </div>
             </div>
@@ -27,7 +27,7 @@ const PropertyInfo = ({price, address, beds, baths, sqft}) => {
                 <div className="flex flex-auto  mt-7 mb-7">
                     <img src="/asset/img/profile.jpg" alt="User Photo" className="h-14 w-14 rounded-full"/>
                     <div className=" ml-7">
-                        <p className="text-xl font-bold">Username</p>
+                        <p className="text-xl font-bold">{owner}</p>
                         <p className="text-lg text-gray-500">Register Date</p>
                     </div>
 
