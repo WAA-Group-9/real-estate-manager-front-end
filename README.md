@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+#Front End Property Management System
+Overview
+This project is a front-end property management system built using React. It allows users or buyers to log in using either a username and password or Google authentication. Once logged in, users can view a list of properties and see detailed views for each property. They can also create offers or save properties to a wishlist, which requires them to be logged in. Logged-in users have the ability to manage their profiles, view their wishlists, and create offers.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#Features
+##User authentication:
+Login with username/password
+Login with Google authentication
+##Property browsing:
+View list of properties
+Detailed view for each property
+##User actions:
+Create offers
+Save properties to wishlist
+##User management:
+Edit profiles
 
-## Available Scripts
+#Technologies Used
+###React.js: Front-end JavaScript library for building user interfaces
+###Mapbox: Used for map display
+###React Router: Library for routing in React applications
+###Google Authentication: Used for user authentication
+###Axios: HTTP client for communication with the server
 
-In the project directory, you can run:
+#Installation
+###Clone the repository: git clone https://github.com/WAA-Group-9/real-estate-manager-front-end.git
+###Navigate to the project directory: cd frontend-property-management-system
+###Install dependencies: npm install
+###Start the development server: npm start
 
-### `npm start`
+#Usage
+Register/login to access full functionality.
+Browse properties and view details.
+Create offers or save properties to wishlist.
+Manage profile settings as a logged-in user.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#License
+This project is licensed under the MIT License.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#Acknowledgements
+Thanks to Mapbox for providing the map display functionality.
+Thanks to the creators of React, React Router, Google Authentication, and Axios for their excellent libraries and tools.
